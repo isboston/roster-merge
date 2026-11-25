@@ -43,3 +43,16 @@ Open the result in ONLYOFFICE or Excel. The Shifts tab contains 11 timed assignm
 Place source XLSX files in a single directory. Each worksheet uses the first row for headers and one assignment per following row. The three supported header sets match the workbooks in examples. Columns may be reordered. Use exact employee names, one shared local time zone, ISO dates and 24-hour times. A time window ending earlier than it starts crosses midnight. Explicit start and end timestamps must already contain the correct dates.
 
 The CLI creates or replaces the named output workbook. Use a distinct output filename. Unrecognized rows go to Review with the source values. Merging runs offline. Inference uses the local Ollama service. Nextcloud integration is a future experiment.
+
+## Header mapping experiment
+
+On an Ubuntu 24.04 VM with four vCPUs and 7.8 GiB RAM, Qwen2.5 1.5B
+mapped 40/40 fields correctly across ten synthetic English header sets.
+The small fixed synonym dictionary in evaluate.py mapped 20/40 fields.
+The model took a median 3.66 seconds per request, including one cold request.
+The dictionary was hand-written and deliberately limited. The cases are
+synthetic and unambiguous, so these figures do not establish accuracy on real
+workbooks, other languages, or ambiguous headers. Review every proposal.
+
+Run `python evaluate.py` with Ollama running to repeat the experiment. It
+writes evaluation/results.json. The committed file contains the original run.

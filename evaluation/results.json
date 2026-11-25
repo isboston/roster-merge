@@ -1,0 +1,292 @@
+[
+  {
+    "case": 1,
+    "headers": [
+      "Employee",
+      "Date",
+      "Start",
+      "End"
+    ],
+    "expected": {
+      "Employee": "Employee",
+      "Date": "Date",
+      "Start": "Start",
+      "End": "End"
+    },
+    "dictionary": {
+      "Employee": "Employee",
+      "Date": "Date",
+      "Start": "Start",
+      "End": "End"
+    },
+    "llm": {
+      "Employee": "Employee",
+      "Date": "Date",
+      "Start": "Start",
+      "End": "End"
+    },
+    "llm_seconds": 7.39,
+    "error": null
+  },
+  {
+    "case": 2,
+    "headers": [
+      "Clock out",
+      "Assigned technician",
+      "Clock in",
+      "Duty day"
+    ],
+    "expected": {
+      "Employee": "Assigned technician",
+      "Date": "Duty day",
+      "Start": "Clock in",
+      "End": "Clock out"
+    },
+    "dictionary": {
+      "Employee": null,
+      "Date": null,
+      "Start": "Clock in",
+      "End": "Clock out"
+    },
+    "llm": {
+      "Employee": "Assigned technician",
+      "Date": "Duty day",
+      "Start": "Clock in",
+      "End": "Clock out"
+    },
+    "llm_seconds": 3.26,
+    "error": null
+  },
+  {
+    "case": 3,
+    "headers": [
+      "Staff member",
+      "Shift date",
+      "Start time",
+      "End time"
+    ],
+    "expected": {
+      "Employee": "Staff member",
+      "Date": "Shift date",
+      "Start": "Start time",
+      "End": "End time"
+    },
+    "dictionary": {
+      "Employee": "Staff member",
+      "Date": "Shift date",
+      "Start": "Start time",
+      "End": "End time"
+    },
+    "llm": {
+      "Employee": "Staff member",
+      "Date": "Shift date",
+      "Start": "Start time",
+      "End": "End time"
+    },
+    "llm_seconds": 3.53,
+    "error": null
+  },
+  {
+    "case": 4,
+    "headers": [
+      "Worker",
+      "Workday",
+      "From",
+      "Until"
+    ],
+    "expected": {
+      "Employee": "Worker",
+      "Date": "Workday",
+      "Start": "From",
+      "End": "Until"
+    },
+    "dictionary": {
+      "Employee": "Worker",
+      "Date": "Workday",
+      "Start": "From",
+      "End": "Until"
+    },
+    "llm": {
+      "Employee": "Worker",
+      "Date": "Workday",
+      "Start": "From",
+      "End": "Until"
+    },
+    "llm_seconds": 3.17,
+    "error": null
+  },
+  {
+    "case": 5,
+    "headers": [
+      "Name",
+      "Date of duty",
+      "Shift begins",
+      "Shift finishes"
+    ],
+    "expected": {
+      "Employee": "Name",
+      "Date": "Date of duty",
+      "Start": "Shift begins",
+      "End": "Shift finishes"
+    },
+    "dictionary": {
+      "Employee": "Name",
+      "Date": null,
+      "Start": null,
+      "End": null
+    },
+    "llm": {
+      "Employee": "Name",
+      "Date": "Date of duty",
+      "Start": "Shift begins",
+      "End": "Shift finishes"
+    },
+    "llm_seconds": 4.66,
+    "error": null
+  },
+  {
+    "case": 6,
+    "headers": [
+      "Agent",
+      "Calendar date",
+      "Beginning",
+      "Ending"
+    ],
+    "expected": {
+      "Employee": "Agent",
+      "Date": "Calendar date",
+      "Start": "Beginning",
+      "End": "Ending"
+    },
+    "dictionary": {
+      "Employee": null,
+      "Date": null,
+      "Start": null,
+      "End": null
+    },
+    "llm": {
+      "Employee": "Agent",
+      "Date": "Calendar date",
+      "Start": "Beginning",
+      "End": "Ending"
+    },
+    "llm_seconds": 4.89,
+    "error": null
+  },
+  {
+    "case": 7,
+    "headers": [
+      "Team member",
+      "Day",
+      "In",
+      "Out"
+    ],
+    "expected": {
+      "Employee": "Team member",
+      "Date": "Day",
+      "Start": "In",
+      "End": "Out"
+    },
+    "dictionary": {
+      "Employee": null,
+      "Date": "Day",
+      "Start": null,
+      "End": null
+    },
+    "llm": {
+      "Employee": "Team member",
+      "Date": "Day",
+      "Start": "In",
+      "End": "Out"
+    },
+    "llm_seconds": 3.09,
+    "error": null
+  },
+  {
+    "case": 8,
+    "headers": [
+      "On-call person",
+      "Service date",
+      "Duty starts",
+      "Duty ends"
+    ],
+    "expected": {
+      "Employee": "On-call person",
+      "Date": "Service date",
+      "Start": "Duty starts",
+      "End": "Duty ends"
+    },
+    "dictionary": {
+      "Employee": null,
+      "Date": null,
+      "Start": null,
+      "End": null
+    },
+    "llm": {
+      "Employee": "On-call person",
+      "Date": "Service date",
+      "Start": "Duty starts",
+      "End": "Duty ends"
+    },
+    "llm_seconds": 4.12,
+    "error": null
+  },
+  {
+    "case": 9,
+    "headers": [
+      "Personnel",
+      "Scheduled date",
+      "Arrival",
+      "Departure"
+    ],
+    "expected": {
+      "Employee": "Personnel",
+      "Date": "Scheduled date",
+      "Start": "Arrival",
+      "End": "Departure"
+    },
+    "dictionary": {
+      "Employee": null,
+      "Date": null,
+      "Start": null,
+      "End": null
+    },
+    "llm": {
+      "Employee": "Personnel",
+      "Date": "Scheduled date",
+      "Start": "Arrival",
+      "End": "Departure"
+    },
+    "llm_seconds": 3.41,
+    "error": null
+  },
+  {
+    "case": 10,
+    "headers": [
+      "Employee name",
+      "Shift day",
+      "Time in",
+      "Time out"
+    ],
+    "expected": {
+      "Employee": "Employee name",
+      "Date": "Shift day",
+      "Start": "Time in",
+      "End": "Time out"
+    },
+    "dictionary": {
+      "Employee": "Employee name",
+      "Date": "Shift day",
+      "Start": "Time in",
+      "End": "Time out"
+    },
+    "llm": {
+      "Employee": "Employee name",
+      "Date": "Shift day",
+      "Start": "Time in",
+      "End": "Time out"
+    },
+    "llm_seconds": 3.79,
+    "error": null
+  }
+]
