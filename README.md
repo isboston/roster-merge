@@ -1,4 +1,26 @@
-# Roster Merge
+# Roster Merge with local Ollama
+
+## Try an unfamiliar roster with a local language model
+
+After installing the Python dependencies below, start Ollama locally and run:
+
+```sh
+ollama pull qwen2.5:1.5b
+python merge.py demo-llm baseline.xlsx
+python suggest.py demo-llm/dispatch.xlsx --sheet Dispatch > proposal.json
+cat proposal.json
+# After checking each proposed source column:
+python merge.py demo-llm combined_schedule.xlsx --approved-mapping proposal.json
+```
+
+The first run sends both dispatch rows to Review. Ollama receives only column
+labels and proposes a JSON mapping. Check that Employee maps to Assigned
+technician, Date to Duty day, Start to Clock in and End to Clock out before
+applying. Both shifts should then appear in Shifts. This experiment covers
+one new layout with separate date and time fields. A structurally valid
+mapping can still be semantically wrong. Ambiguous or duplicate selections
+are rejected; a human makes the final decision. The approved mapping is
+scoped to the exact source filename, sheet and ordered headers.
 
 Combine duty schedules from three departments into one Excel workbook. Every shift links back through its source filename, worksheet name and row number. The included schedules are fictional.
 
@@ -20,4 +42,4 @@ Open the result in ONLYOFFICE or Excel. The Shifts tab contains 11 timed assignm
 
 Place source XLSX files in a single directory. Each worksheet uses the first row for headers and one assignment per following row. The three supported header sets match the workbooks in examples. Columns may be reordered. Use exact employee names, one shared local time zone, ISO dates and 24-hour times. A time window ending earlier than it starts crosses midnight. Explicit start and end timestamps must already contain the correct dates.
 
-The CLI creates or replaces the named output workbook. Use a distinct output filename. Unrecognized rows go to Review with the source values. This version uses deterministic rules and runs offline after dependency installation. Nextcloud integration and model-assisted mapping of unfamiliar headers are future experiments.
+The CLI creates or replaces the named output workbook. Use a distinct output filename. Unrecognized rows go to Review with the source values. Merging runs offline. Inference uses the local Ollama service. Nextcloud integration is a future experiment.

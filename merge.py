@@ -1,5 +1,7 @@
 """Merge supported English duty rosters into an auditable XLSX workbook."""
 import argparse
+import json
+from suggest import validate
 from collections import defaultdict
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
@@ -31,7 +33,7 @@ def parse(row):
     return name.strip(), start, end
 
 
-def merge(folder, output):
+def merge(folder, output, approved=None):
     files = sorted(p for p in folder.glob("*.xlsx") if p.resolve() != output.resolve() and not p.name.startswith("~$"))
     if not files:
         raise ValueError("Input folder contains no XLSX files")
@@ -44,12 +46,21 @@ def merge(folder, output):
     conflicts.append(["Employee", "Overlap start", "Overlap end", "First file", "First sheet", "First row", "Second file", "Second sheet", "Second row"])
     review.append(["File", "Sheet", "Row", "Reason", "Source values"])
     people = defaultdict(list)
+    applied = False
     for path in files:
         source = load_workbook(path, read_only=True)
         try:
             for sheet in source:
                 rows = sheet.values
                 headers = next(rows, ())
+                if approved and (path.name, sheet.title) == (approved["file"], approved["sheet"]):
+                    if list(headers) != approved["headers"]:
+                        raise ValueError("Worksheet headers have changed since review")
+                    mapping = approved["mapping"]
+                    validate(headers, mapping)
+                    aliases = {source: field for field, source in mapping.items()}
+                    headers = [aliases.get(h) for h in headers]
+                    applied = True
                 for number, values in enumerate(rows, 2):
                     if all(v is None for v in values):
                         continue
@@ -62,6 +73,8 @@ def merge(folder, output):
                     people[name].append((start, end, ref))
         finally:
             source.close()
+    if approved and not applied:
+        raise ValueError("The approved worksheet was not found")
     for name, entries in sorted(people.items()):
         active = []
         for start, end, ref in sorted(entries):
@@ -94,5 +107,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("folder", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--approved-mapping", type=Path, help="Apply a reviewed JSON proposal")
     args = parser.parse_args()
-    merge(args.folder, args.output)
+    merge(args.folder, args.output, json.loads(args.approved_mapping.read_text()) if args.approved_mapping else None)

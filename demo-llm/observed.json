@@ -1,0 +1,17 @@
+{
+  "file": "dispatch.xlsx",
+  "sheet": "Dispatch",
+  "headers": [
+    "Clock out",
+    "Assigned technician",
+    "Clock in",
+    "Duty day"
+  ],
+  "model": "qwen2.5:1.5b",
+  "mapping": {
+    "Employee": "Assigned technician",
+    "Date": "Duty day",
+    "Start": "Clock in",
+    "End": "Clock out"
+  }
+}
